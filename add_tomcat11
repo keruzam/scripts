@@ -1,0 +1,23 @@
+
+# group for tomcat
+groupadd tomcat
+
+# user no login
+useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+
+# dowload tomcat
+curl -O https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.11/bin/apache-tomcat-11.0.11.tar.gz
+
+# tomcat folder
+mkdir /opt/tomcat
+tar xzvf apache-tomcat-11.0.11.tar.gz -C /opt/tomcat --strip-components=1
+
+# owner
+sudo chown -R tomcat:tomcat /opt/tomcat
+
+# security
+cd /opt/tomcat
+sudo chgrp -R tomcat /opt/tomcat
+sudo chmod -R g+r conf
+sudo chmod g+x conf
+sudo chown -R tomcat webapps/ work/ temp/ logs/
